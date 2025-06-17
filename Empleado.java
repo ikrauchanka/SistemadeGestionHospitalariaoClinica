@@ -27,6 +27,9 @@ public class Empleado extends Persona{
         return idEmpleado;
     }
 
+    public Cargo getCargoEmpleado() {
+        return cargo;
+    }
     public void setIdEmpleado(int idEmpleado) {
         // TODO check for unique
         this.idEmpleado = idEmpleado;
