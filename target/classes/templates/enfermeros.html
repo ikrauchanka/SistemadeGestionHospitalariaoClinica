@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Enfermeros</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h1>Lista de Enfermeros</h1>
+    
+    <a href="/enfermeros/nuevo">Nuevo Enfermero</a>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>DNI</th>
+                <th>Área</th>
+                <th>Turno</th>
+                <th>Cargo</th>
+                <th>Salario</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="enfermero : ${enfermeros}">
+                <td th:text="${enfermero.id}"></td>
+                <td th:text="${enfermero.nombre}"></td>
+                <td th:text="${enfermero.apellido}"></td>
+                <td th:text="${enfermero.dni}"></td>
+                <td th:text="${enfermero.area}"></td>
+                <td th:text="${enfermero.turno}"></td>
+                <td th:text="${enfermero.cargo}"></td>
+                <td th:text="${enfermero.salario}"></td>
+                <td>
+                    <a th:href="@{/enfermeros/eliminar/{id}(id=${enfermero.id})}">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <a href="/">Volver al Inicio</a>
+</body>
+</html> 

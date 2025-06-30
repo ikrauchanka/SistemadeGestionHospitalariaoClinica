@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Consultas</title>
+    <meta charset="UTF-8">
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .btn {
+            padding: 5px 10px;
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            border-radius: 3px;
+            margin-right: 5px;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <h1>🏥 Lista de Consultas</h1>
+    
+    <a href="/consultas/nueva" class="btn">➕ Nueva Consulta</a>
+    <a href="/" class="btn btn-secondary">🏠 Inicio</a>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Médico</th>
+                <th>Paciente</th>
+                <th>Motivo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="consulta : ${consultas}">
+                <td th:text="${consulta.idConsulta}"></td>
+                <td th:text="${consulta.fechaConsulta}"></td>
+                <td th:text="${consulta.horaConsulta}"></td>
+                <td th:text="${consulta.medico.nombre + ' ' + consulta.medico.apellido}"></td>
+                <td th:text="${consulta.paciente.nombre + ' ' + consulta.paciente.apellido}"></td>
+                <td th:text="${consulta.motivo}"></td>
+                <td>
+                    <a th:href="@{/consultas/{id}(id=${consulta.idConsulta})}" class="btn">👁️ Ver</a>
+                    <a th:href="@{/consultas/eliminar/{id}(id=${consulta.idConsulta})}" 
+                       onclick="return confirm('¿Está seguro de que desea eliminar esta consulta?')" 
+                       class="btn btn-danger">🗑️ Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <p th:if="${#lists.isEmpty(consultas)}">No hay consultas registradas.</p>
+</body>
+</html> 

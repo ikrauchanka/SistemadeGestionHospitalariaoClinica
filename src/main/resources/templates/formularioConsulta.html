@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nueva Consulta</title>
+    <meta charset="UTF-8">
+    <style>
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .btn {
+            padding: 10px 20px;
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏥 Nueva Consulta</h1>
+        
+        <form th:action="@{/consultas}" th:object="${consulta}" method="post">
+            <div class="form-group">
+                <label for="fechaConsulta">Fecha de Consulta:</label>
+                <input type="date" id="fechaConsulta" th:field="*{fechaConsulta}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="horaConsulta">Hora de Consulta:</label>
+                <input type="time" id="horaConsulta" th:field="*{horaConsulta}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="motivo">Motivo:</label>
+                <textarea id="motivo" th:field="*{motivo}" rows="3" required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="medicoId">Médico:</label>
+                <select id="medicoId" name="medicoId" required>
+                    <option value="">Seleccione un médico</option>
+                    <option th:each="medico : ${medicos}" th:value="${medico.id}" 
+                            th:text="${medico.nombre + ' ' + medico.apellido + ' - ' + medico.especialidad}"></option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="pacienteId">Paciente:</label>
+                <select id="pacienteId" name="pacienteId" required>
+                    <option value="">Seleccione un paciente</option>
+                    <option th:each="paciente : ${pacientes}" th:value="${paciente.id}" 
+                            th:text="${paciente.nombre + ' ' + paciente.apellido + ' - DNI: ' + paciente.dni}"></option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="diagnostico">Diagnóstico:</label>
+                <textarea id="diagnostico" th:field="*{diagnostico}" rows="3"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="tratamientoIndicado">Tratamiento Indicado:</label>
+                <textarea id="tratamientoIndicado" th:field="*{tratamientoIndicado}" rows="3"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <button type="submit" class="btn">Guardar Consulta</button>
+                <a href="/consultas" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

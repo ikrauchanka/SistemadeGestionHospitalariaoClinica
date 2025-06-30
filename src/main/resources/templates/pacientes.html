@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Pacientes</title>
+    <meta charset="UTF-8">
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .btn {
+            padding: 5px 10px;
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            border-radius: 3px;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+        .btn-warning {
+            background-color: #ffc107;
+        }
+    </style>
+</head>
+<body>
+    <h1>👥 Lista de Pacientes</h1>
+    
+    <a href="/pacientes/nuevo" class="btn">➕ Agregar nuevo paciente</a>
+    <a href="/" class="btn btn-secondary">🏠 Inicio</a>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>DNI</th>
+                <th>Grupo Sanguíneo</th>
+                <th>Alergias</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="paciente : ${pacientes}">
+                <td th:text="${paciente.id}"></td>
+                <td th:text="${paciente.nombre}"></td>
+                <td th:text="${paciente.apellido}"></td>
+                <td th:text="${paciente.dni}"></td>
+                <td th:text="${paciente.grupoSanguineo}"></td>
+                <td th:text="${paciente.alergias != null ? paciente.alergias : 'Ninguna'}"></td>
+                <td>
+                    <a th:href="@{/pacientes/editar/{id}(id=${paciente.id})}" class="btn btn-warning" style="margin-right:5px;">✏️ Editar</a>
+                    <a th:href="@{/pacientes/eliminar/{id}(id=${paciente.id})}" class="btn btn-danger">🗑️ Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <p th:if="${#lists.isEmpty(pacientes)}">No hay pacientes registrados.</p>
+</body>
+</html>

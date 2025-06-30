@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Historiales Médicos</title>
+    <meta charset="UTF-8">
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .btn {
+            padding: 5px 10px;
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            border-radius: 3px;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <h1>📋 Historiales Médicos</h1>
+    <a href="/" class="btn btn-secondary">🏠 Inicio</a>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Paciente</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="historial : ${historiales}">
+                <td th:text="${historial.idHistorial}"></td>
+                <td th:text="${historial.paciente != null ? historial.paciente.nombre + ' ' + historial.paciente.apellido : 'Sin paciente'}"></td>
+                <td>
+                    <a th:href="@{/historiales/{id}(id=${historial.idHistorial})}" class="btn">Ver detalles</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <p th:if="${#lists.isEmpty(historiales)}">No hay historiales médicos registrados.</p>
+</body>
+</html> 

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Administrativos</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h1>Lista de Administrativos</h1>
+    
+    <a href="/administrativos/nuevo">Nuevo Administrativo</a>
+    <a href="/">Inicio</a>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>DNI</th>
+                <th>Área</th>
+                <th>Cargo</th>
+                <th>Salario</th>
+                <th>Fecha Contratación</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="administrativo : ${administrativos}">
+                <td th:text="${administrativo.id}"></td>
+                <td th:text="${administrativo.nombre}"></td>
+                <td th:text="${administrativo.apellido}"></td>
+                <td th:text="${administrativo.dni}"></td>
+                <td th:text="${administrativo.area}"></td>
+                <td th:text="${administrativo.cargo}"></td>
+                <td th:text="${administrativo.salario}"></td>
+                <td th:text="${administrativo.fechaContratacion}"></td>
+                <td>
+                    <a th:href="@{/administrativos/eliminar/{id}(id=${administrativo.id})}" 
+                       onclick="return confirm('¿Está seguro de que desea eliminar este administrativo?')">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html> 

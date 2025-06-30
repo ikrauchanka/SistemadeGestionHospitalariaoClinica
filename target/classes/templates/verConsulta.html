@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Detalles de la Consulta</title>
+    <meta charset="UTF-8">
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .section {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .btn {
+            padding: 8px 15px;
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            border-radius: 3px;
+            margin-right: 10px;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+        }
+        .info-row {
+            margin-bottom: 10px;
+        }
+        .label {
+            font-weight: bold;
+            display: inline-block;
+            width: 150px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏥 Detalles de la Consulta</h1>
+        
+        <div class="section">
+            <h2>Información de la Consulta</h2>
+            <div class="info-row">
+                <span class="label">ID de Consulta:</span>
+                <span th:text="${consulta.idConsulta}"></span>
+            </div>
+            <div class="info-row">
+                <span class="label">Fecha:</span>
+                <span th:text="${consulta.fechaConsulta}"></span>
+            </div>
+            <div class="info-row">
+                <span class="label">Hora:</span>
+                <span th:text="${consulta.horaConsulta}"></span>
+            </div>
+            <div class="info-row">
+                <span class="label">Motivo:</span>
+                <span th:text="${consulta.motivo}"></span>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Información del Médico</h2>
+            <div class="info-row">
+                <span class="label">Nombre:</span>
+                <span th:text="${consulta.medico.nombre + ' ' + consulta.medico.apellido}"></span>
+            </div>
+            <div class="info-row">
+                <span class="label">Especialidad:</span>
+                <span th:text="${consulta.medico.especialidad}"></span>
+            </div>
+            <div class="info-row">
+                <span class="label">Matrícula:</span>
+                <span th:text="${consulta.medico.numMatricula}"></span>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Información del Paciente</h2>
+            <div class="info-row">
+                <span class="label">Nombre:</span>
+                <span th:text="${consulta.paciente.nombre + ' ' + consulta.paciente.apellido}"></span>
+            </div>
+            <div class="info-row">
+                <span class="label">DNI:</span>
+                <span th:text="${consulta.paciente.dni}"></span>
+            </div>
+            <div class="info-row">
+                <span class="label">Grupo Sanguíneo:</span>
+                <span th:text="${consulta.paciente.grupoSanguineo}"></span>
+            </div>
+        </div>
+        
+        <div class="section" th:if="${consulta.diagnostico != null and !consulta.diagnostico.isEmpty()}">
+            <h2>Diagnóstico</h2>
+            <p th:text="${consulta.diagnostico}"></p>
+        </div>
+        
+        <div class="section" th:if="${consulta.tratamientoIndicado != null and !consulta.tratamientoIndicado.isEmpty()}">
+            <h2>Tratamiento Indicado</h2>
+            <p th:text="${consulta.tratamientoIndicado}"></p>
+        </div>
+        
+        <div style="margin-top: 20px;">
+            <a href="/consultas" class="btn btn-secondary">← Volver a Consultas</a>
+            <a href="/" class="btn">🏠 Inicio</a>
+            <a th:href="@{/consultas/eliminar/{id}(id=${consulta.idConsulta})}" class="btn btn-danger" 
+               onclick="return confirm('¿Está seguro de que desea eliminar esta consulta?')">🗑️ Eliminar</a>
+        </div>
+    </div>
+</body>
+</html> 
