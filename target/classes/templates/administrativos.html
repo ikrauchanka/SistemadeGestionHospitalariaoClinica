@@ -1,45 +1,122 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Administrativos</title>
+    <title>Lista de Administrativos</title>
     <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .btn {
+            padding: 10px 20px;
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            border-radius: 5px;
+            margin-right: 10px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+            text-decoration: none;
+            color: white;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+        .btn-secondary:hover {
+            background-color: #545b62;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            color: #495057;
+        }
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        tr:hover {
+            background-color: #e9ecef;
+        }
+        .empty-message {
+            text-align: center;
+            color: #6c757d;
+            font-style: italic;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Lista de Administrativos</h1>
-    
-    <a href="/administrativos/nuevo">Nuevo Administrativo</a>
-    <a href="/">Inicio</a>
-    
-    <table border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>DNI</th>
-                <th>Área</th>
-                <th>Cargo</th>
-                <th>Salario</th>
-                <th>Fecha Contratación</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="administrativo : ${administrativos}">
-                <td th:text="${administrativo.id}"></td>
-                <td th:text="${administrativo.nombre}"></td>
-                <td th:text="${administrativo.apellido}"></td>
-                <td th:text="${administrativo.dni}"></td>
-                <td th:text="${administrativo.area}"></td>
-                <td th:text="${administrativo.cargo}"></td>
-                <td th:text="${administrativo.salario}"></td>
-                <td th:text="${administrativo.fechaContratacion}"></td>
-                <td>
-                    <a th:href="@{/administrativos/eliminar/{id}(id=${administrativo.id})}" 
-                       onclick="return confirm('¿Está seguro de que desea eliminar este administrativo?')">Eliminar</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="container">
+        <h1>Lista de Administrativos</h1>
+        
+        <a href="/administrativos/nuevo" class="btn">Nuevo Administrativo</a>
+        <a href="/" class="btn btn-secondary">Inicio</a>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>DNI</th>
+                    <th>Departamento</th>
+                    <th>Cargo</th>
+                    <th>Salario</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="administrativo : ${administrativos}">
+                    <td th:text="${administrativo.id}"></td>
+                    <td th:text="${administrativo.nombre}"></td>
+                    <td th:text="${administrativo.apellido}"></td>
+                    <td th:text="${administrativo.dni}"></td>
+                    <td th:text="${administrativo.departamento}"></td>
+                    <td th:text="${administrativo.cargo}"></td>
+                    <td th:text="${administrativo.salario}"></td>
+                    <td>
+                        <a th:href="@{/administrativos/eliminar/{id}(id=${administrativo.id})}" 
+                           onclick="return confirm('¿Está seguro de que desea eliminar este administrativo?')" 
+                           class="btn btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <p th:if="${#lists.isEmpty(administrativos)}" class="empty-message">No hay administrativos registrados.</p>
+    </div>
 </body>
 </html> 

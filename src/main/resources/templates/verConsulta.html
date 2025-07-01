@@ -4,112 +4,160 @@
     <title>Detalles de la Consulta</title>
     <meta charset="UTF-8">
     <style>
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
         }
-        .section {
-            margin-bottom: 20px;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
         }
         .btn {
-            padding: 8px 15px;
+            padding: 10px 20px;
             text-decoration: none;
             color: white;
             background-color: #007bff;
-            border-radius: 3px;
+            border-radius: 5px;
             margin-right: 10px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+            text-decoration: none;
+            color: white;
         }
         .btn-secondary {
             background-color: #6c757d;
         }
+        .btn-secondary:hover {
+            background-color: #545b62;
+        }
         .btn-danger {
             background-color: #dc3545;
         }
-        .info-row {
-            margin-bottom: 10px;
+        .btn-danger:hover {
+            background-color: #c82333;
         }
-        .label {
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+        }
+        .section h3 {
+            color: #495057;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+        }
+        .info-row {
+            display: flex;
+            margin-bottom: 10px;
+            padding: 8px;
+            background-color: white;
+            border-radius: 3px;
+        }
+        .info-label {
             font-weight: bold;
-            display: inline-block;
-            width: 150px;
+            width: 200px;
+            color: #495057;
+        }
+        .info-value {
+            flex: 1;
+            color: #333;
+        }
+        .diagnostico-section {
+            background-color: #e7f3ff;
+            border-left: 4px solid #007bff;
+        }
+        .tratamiento-section {
+            background-color: #f0f8e7;
+            border-left: 4px solid #28a745;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🏥 Detalles de la Consulta</h1>
+        <h1>Detalles de la Consulta</h1>
+        
+        <a href="/consultas" class="btn btn-secondary">Volver a Consultas</a>
+        <a href="/" class="btn btn-secondary">Inicio</a>
+        <a th:href="@{/consultas/eliminar/{id}(id=${consulta.idConsulta})}" 
+           onclick="return confirm('¿Está seguro de que desea eliminar esta consulta?')" 
+           class="btn btn-danger">Eliminar</a>
         
         <div class="section">
-            <h2>Información de la Consulta</h2>
+            <h3>Información de la Consulta</h3>
             <div class="info-row">
-                <span class="label">ID de Consulta:</span>
-                <span th:text="${consulta.idConsulta}"></span>
+                <span class="info-label">ID de Consulta:</span>
+                <span class="info-value" th:text="${consulta.idConsulta}"></span>
             </div>
             <div class="info-row">
-                <span class="label">Fecha:</span>
-                <span th:text="${consulta.fechaConsulta}"></span>
+                <span class="info-label">Fecha:</span>
+                <span class="info-value" th:text="${consulta.fechaConsulta}"></span>
             </div>
             <div class="info-row">
-                <span class="label">Hora:</span>
-                <span th:text="${consulta.horaConsulta}"></span>
+                <span class="info-label">Hora:</span>
+                <span class="info-value" th:text="${consulta.horaConsulta}"></span>
             </div>
             <div class="info-row">
-                <span class="label">Motivo:</span>
-                <span th:text="${consulta.motivo}"></span>
+                <span class="info-label">Motivo:</span>
+                <span class="info-value" th:text="${consulta.motivo}"></span>
             </div>
         </div>
         
         <div class="section">
-            <h2>Información del Médico</h2>
+            <h3>Información del Médico</h3>
             <div class="info-row">
-                <span class="label">Nombre:</span>
-                <span th:text="${consulta.medico.nombre + ' ' + consulta.medico.apellido}"></span>
+                <span class="info-label">Nombre:</span>
+                <span class="info-value" th:text="${consulta.medico.nombre + ' ' + consulta.medico.apellido}"></span>
             </div>
             <div class="info-row">
-                <span class="label">Especialidad:</span>
-                <span th:text="${consulta.medico.especialidad}"></span>
+                <span class="info-label">Especialidad:</span>
+                <span class="info-value" th:text="${consulta.medico.especialidad}"></span>
             </div>
             <div class="info-row">
-                <span class="label">Matrícula:</span>
-                <span th:text="${consulta.medico.numMatricula}"></span>
+                <span class="info-label">Matrícula:</span>
+                <span class="info-value" th:text="${consulta.medico.numMatricula}"></span>
             </div>
         </div>
         
         <div class="section">
-            <h2>Información del Paciente</h2>
+            <h3>Información del Paciente</h3>
             <div class="info-row">
-                <span class="label">Nombre:</span>
-                <span th:text="${consulta.paciente.nombre + ' ' + consulta.paciente.apellido}"></span>
+                <span class="info-label">Nombre:</span>
+                <span class="info-value" th:text="${consulta.paciente.nombre + ' ' + consulta.paciente.apellido}"></span>
             </div>
             <div class="info-row">
-                <span class="label">DNI:</span>
-                <span th:text="${consulta.paciente.dni}"></span>
+                <span class="info-label">DNI:</span>
+                <span class="info-value" th:text="${consulta.paciente.dni}"></span>
             </div>
             <div class="info-row">
-                <span class="label">Grupo Sanguíneo:</span>
-                <span th:text="${consulta.paciente.grupoSanguineo}"></span>
+                <span class="info-label">Grupo Sanguíneo:</span>
+                <span class="info-value" th:text="${consulta.paciente.grupoSanguineo}"></span>
             </div>
         </div>
         
-        <div class="section" th:if="${consulta.diagnostico != null and !consulta.diagnostico.isEmpty()}">
-            <h2>Diagnóstico</h2>
+        <div class="section diagnostico-section" th:if="${consulta.diagnostico != null and !consulta.diagnostico.isEmpty()}">
+            <h3>Diagnóstico</h3>
             <p th:text="${consulta.diagnostico}"></p>
         </div>
         
-        <div class="section" th:if="${consulta.tratamientoIndicado != null and !consulta.tratamientoIndicado.isEmpty()}">
-            <h2>Tratamiento Indicado</h2>
+        <div class="section tratamiento-section" th:if="${consulta.tratamientoIndicado != null and !consulta.tratamientoIndicado.isEmpty()}">
+            <h3>Tratamiento Indicado</h3>
             <p th:text="${consulta.tratamientoIndicado}"></p>
-        </div>
-        
-        <div style="margin-top: 20px;">
-            <a href="/consultas" class="btn btn-secondary">← Volver a Consultas</a>
-            <a href="/" class="btn">🏠 Inicio</a>
-            <a th:href="@{/consultas/eliminar/{id}(id=${consulta.idConsulta})}" class="btn btn-danger" 
-               onclick="return confirm('¿Está seguro de que desea eliminar esta consulta?')">🗑️ Eliminar</a>
         </div>
     </div>
 </body>

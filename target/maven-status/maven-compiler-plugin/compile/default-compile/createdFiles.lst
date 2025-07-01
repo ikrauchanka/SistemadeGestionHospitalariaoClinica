@@ -6,12 +6,12 @@ com/ikravchenko/clinica/models/Persona.class
 com/ikravchenko/clinica/models/Alergia.class
 com/ikravchenko/clinica/controllers/HistorialMedicoController.class
 com/ikravchenko/clinica/models/Especialidad.class
-com/ikravchenko/clinica/models/Producto.class
 com/ikravchenko/clinica/ServletInitializer.class
 com/ikravchenko/clinica/repositories/AdministrativoRepository.class
 com/ikravchenko/clinica/repositories/MedicoRepository.class
 com/ikravchenko/clinica/models/Empleado.class
 com/ikravchenko/clinica/models/Area.class
+com/ikravchenko/clinica/controllers/ReportesController.class
 com/ikravchenko/clinica/controllers/EmpleadoController.class
 com/ikravchenko/clinica/repositories/EnfermeroRepository.class
 com/ikravchenko/clinica/exceptions/PacienteNoEncontradoException.class
@@ -20,7 +20,6 @@ com/ikravchenko/clinica/repositories/PacienteRepository.class
 com/ikravchenko/clinica/repositories/ConsultaRepository.class
 com/ikravchenko/clinica/controllers/MedicoController.class
 com/ikravchenko/clinica/ClinicaGestion.class
-com/ikravchenko/clinica/controllers/ProductoController.class
 com/ikravchenko/clinica/models/HistorialMedico.class
 com/ikravchenko/clinica/models/Consulta.class
 com/ikravchenko/clinica/exceptions/DniDuplicadoException.class
@@ -28,12 +27,10 @@ com/ikravchenko/clinica/models/Turno.class
 com/ikravchenko/clinica/models/Enfermero.class
 com/ikravchenko/clinica/controllers/HomeController.class
 com/ikravchenko/clinica/controllers/AdministrativoController.class
-com/ikravchenko/clinica/repositories/ProductoRepository.class
 com/ikravchenko/clinica/controllers/ConsultaController.class
 com/ikravchenko/clinica/controllers/PacienteController.class
 com/ikravchenko/clinica/exceptions/MedicoNoDisponibleException.class
 com/ikravchenko/clinica/repositories/HistorialMedicoRepository.class
-TestConnection.class
 com/ikravchenko/clinica/models/Administrativo.class
 com/ikravchenko/clinica/controllers/EnfermeroController.class
 com/ikravchenko/clinica/models/GrupoSanguineo.class

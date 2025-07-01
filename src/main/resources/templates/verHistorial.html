@@ -4,95 +4,148 @@
     <title>Detalles del Historial Médico</title>
     <meta charset="UTF-8">
     <style>
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
         }
-        .section {
-            margin-bottom: 20px;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
         }
         .btn {
-            padding: 8px 15px;
+            padding: 10px 20px;
             text-decoration: none;
             color: white;
             background-color: #007bff;
-            border-radius: 3px;
+            border-radius: 5px;
             margin-right: 10px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+            text-decoration: none;
+            color: white;
         }
         .btn-secondary {
             background-color: #6c757d;
         }
-        .info-row {
-            margin-bottom: 10px;
+        .btn-secondary:hover {
+            background-color: #545b62;
         }
-        .label {
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+        }
+        .section h3 {
+            color: #495057;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+        }
+        .info-row {
+            display: flex;
+            margin-bottom: 10px;
+            padding: 8px;
+            background-color: white;
+            border-radius: 3px;
+        }
+        .info-label {
             font-weight: bold;
-            display: inline-block;
-            width: 150px;
+            width: 200px;
+            color: #495057;
+        }
+        .info-value {
+            flex: 1;
+            color: #333;
+        }
+        .consultas-list {
+            list-style: none;
+            padding: 0;
+        }
+        .consulta-item {
+            background-color: white;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #007bff;
+        }
+        .consulta-header {
+            font-weight: bold;
+            color: #495057;
+            margin-bottom: 5px;
+        }
+        .consulta-details {
+            color: #666;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>📋 Detalles del Historial Médico</h1>
+        <h1>Detalles del Historial Médico</h1>
+        
+        <a href="/" class="btn btn-secondary">Inicio</a>
+        
         <div class="section">
-            <h2>Información del Paciente</h2>
+            <h3>Información del Paciente</h3>
             <div class="info-row">
-                <span class="label">Nombre:</span>
-                <span th:text="${historial.paciente != null ? historial.paciente.nombre + ' ' + historial.paciente.apellido : 'Sin paciente'}"></span>
+                <span class="info-label">Nombre:</span>
+                <span class="info-value" th:text="${historial.paciente.nombre + ' ' + historial.paciente.apellido}"></span>
             </div>
             <div class="info-row">
-                <span class="label">DNI:</span>
-                <span th:text="${historial.paciente != null ? historial.paciente.dni : '-'}"></span>
+                <span class="info-label">DNI:</span>
+                <span class="info-value" th:text="${historial.paciente.dni}"></span>
             </div>
             <div class="info-row">
-                <span class="label">Grupo Sanguíneo:</span>
-                <span th:text="${historial.paciente != null ? historial.paciente.grupoSanguineo : '-'}"></span>
+                <span class="info-label">Grupo Sanguíneo:</span>
+                <span class="info-value" th:text="${historial.paciente.grupoSanguineo}"></span>
             </div>
             <div class="info-row">
-                <span class="label">Fecha de Nacimiento:</span>
-                <span th:text="${historial.paciente != null ? historial.paciente.fechaNacimiento : '-'}"></span>
+                <span class="info-label">Alergias:</span>
+                <span class="info-value" th:text="${historial.paciente.alergias != null ? historial.paciente.alergias : 'Ninguna'}"></span>
             </div>
         </div>
+        
         <div class="section">
-            <h2>Información del Historial</h2>
+            <h3>Información del Historial</h3>
             <div class="info-row">
-                <span class="label">ID del Historial:</span>
-                <span th:text="${historial.idHistorial}"></span>
+                <span class="info-label">ID del Historial:</span>
+                <span class="info-value" th:text="${historial.idHistorial}"></span>
             </div>
             <div class="info-row">
-                <span class="label">Fecha de Creación:</span>
-                <!-- Eliminado: historial.fechaCreacion -->
-            </div>
-            <div class="info-row">
-                <span class="label">Alergias:</span>
-                <span th:text="${historial.paciente != null ? historial.paciente.alergias : 'Ninguna'}"></span>
+                <span class="info-label">Fecha de Creación:</span>
+                <span class="info-value" th:text="${historial.fechaCreacion}"></span>
             </div>
         </div>
-        <div class="section" th:if="${historial.consultas != null and !historial.consultas.isEmpty()}">
-            <h2>Consultas Relacionadas</h2>
-            <table style="width: 100%; border-collapse: collapse;">
-                <thead>
-                    <tr>
-                        <th style="border: 1px solid #ddd; padding: 8px;">ID</th>
-                        <th style="border: 1px solid #ddd; padding: 8px;">Motivo</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="consulta : ${historial.consultas}">
-                        <td style="border: 1px solid #ddd; padding: 8px;" th:text="${consulta.idConsulta}"></td>
-                        <td style="border: 1px solid #ddd; padding: 8px;" th:text="${consulta.motivo}"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div style="margin-top: 20px;">
-            <a href="/historiales" class="btn btn-secondary">← Volver a Historiales</a>
-            <a href="/" class="btn">🏠 Inicio</a>
+        
+        <div class="section">
+            <h3>Consultas Registradas</h3>
+            <ul class="consultas-list" th:if="${historial.consultas != null and !historial.consultas.isEmpty()}">
+                <li th:each="consulta : ${historial.consultas}" class="consulta-item">
+                    <div class="consulta-header" th:text="'Consulta del ' + ${consulta.fechaConsulta} + ' a las ' + ${consulta.horaConsulta}"></div>
+                    <div class="consulta-details">
+                        <strong>Médico:</strong> <span th:text="${consulta.medico.nombre + ' ' + consulta.medico.apellido}"></span><br>
+                        <strong>Motivo:</strong> <span th:text="${consulta.motivo}"></span>
+                    </div>
+                </li>
+            </ul>
+            <p th:if="${historial.consultas == null or historial.consultas.isEmpty()}" style="text-align: center; color: #6c757d; font-style: italic;">
+                No hay consultas registradas en este historial.
+            </p>
         </div>
     </div>
 </body>

@@ -10,20 +10,10 @@ public class Consulta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idConsulta;
-    
-    @Column
     private LocalDate fechaConsulta;
-    
-    @Column
     private LocalTime horaConsulta;
-    
-    @Column
     private String motivo;
-    
-    @Column
     private String diagnostico;
-    
-    @Column
     private String tratamientoIndicado;
     
     @ManyToOne

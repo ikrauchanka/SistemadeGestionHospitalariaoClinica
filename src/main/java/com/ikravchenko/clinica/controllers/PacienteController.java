@@ -1,9 +1,6 @@
 package com.ikravchenko.clinica.controllers;
 
-import com.ikravchenko.clinica.models.Paciente;
-import com.ikravchenko.clinica.models.GrupoSanguineo;
-import com.ikravchenko.clinica.models.Alergia;
-import com.ikravchenko.clinica.models.HistorialMedico;
+import com.ikravchenko.clinica.models.*;
 import com.ikravchenko.clinica.repositories.PacienteRepository;
 import com.ikravchenko.clinica.repositories.HistorialMedicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.Arrays;
+
 
 @Controller
 public class PacienteController {
@@ -34,11 +30,16 @@ public class PacienteController {
     @GetMapping("/pacientes/nuevo")
     public String mostrarFormulario(Model model) {
         Paciente paciente = new Paciente();
-        // Значения аллергий из enum через запятую
-        String alergiasPorDefecto = Arrays.stream(Alergia.values())
-            .map(Enum::name)
-            .collect(Collectors.joining(", "));
-        paciente.setAlergias(alergiasPorDefecto);
+        
+        StringBuilder alergiasPorDefecto = new StringBuilder();
+        Alergia[] alergias = Alergia.values();
+        for (int i = 0; i < alergias.length; i++) {
+            if (i > 0) {
+                alergiasPorDefecto.append(", ");
+            }
+            alergiasPorDefecto.append(alergias[i].name());
+        }
+        paciente.setAlergias(alergiasPorDefecto.toString());
         model.addAttribute("paciente", paciente);
         model.addAttribute("grupos", GrupoSanguineo.values());
         return "formularioPaciente";
@@ -74,35 +75,6 @@ public class PacienteController {
         Paciente paciente = pacienteRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Paciente no encontrado"));
         paciente.setActivo(true);
-        pacienteRepository.save(paciente);
-        return "redirect:/pacientes";
-    }
-
-    @GetMapping("/pacientes/editar/{id}")
-    public String mostrarFormularioEdicion(@PathVariable Long id, Model model) {
-        Paciente paciente = pacienteRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Paciente no encontrado"));
-        model.addAttribute("paciente", paciente);
-        model.addAttribute("grupos", GrupoSanguineo.values());
-        return "formularioPaciente";
-    }
-
-    @PostMapping("/pacientes/editar/{id}")
-    public String actualizarPaciente(@PathVariable Long id, @ModelAttribute Paciente pacienteActualizado) {
-        Paciente paciente = pacienteRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Paciente no encontrado"));
-
-        paciente.setNombre(pacienteActualizado.getNombre());
-        paciente.setApellido(pacienteActualizado.getApellido());
-        paciente.setDni(pacienteActualizado.getDni());
-        paciente.setGrupoSanguineo(pacienteActualizado.getGrupoSanguineo());
-        paciente.setAlergias(pacienteActualizado.getAlergias());
-        paciente.setHistorialMedico(pacienteActualizado.getHistorialMedico());
-        paciente.setFechaNacimiento(pacienteActualizado.getFechaNacimiento());
-        paciente.setDireccion(pacienteActualizado.getDireccion());
-        paciente.setTelefono(pacienteActualizado.getTelefono());
-        paciente.setEmail(pacienteActualizado.getEmail());
-
         pacienteRepository.save(paciente);
         return "redirect:/pacientes";
     }

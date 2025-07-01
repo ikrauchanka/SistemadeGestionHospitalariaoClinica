@@ -1,6 +1,4 @@
-/Users/pelican/IdeaProjects/SistemadeGestionHospitalariaoClinica/src/main/java/TestConnection.java
 /Users/pelican/IdeaProjects/SistemadeGestionHospitalariaoClinica/src/main/java/com/ikravchenko/clinica/ClinicaGestion.java
-/Users/pelican/IdeaProjects/SistemadeGestionHospitalariaoClinica/src/main/java/com/ikravchenko/clinica/MainClass.java
 /Users/pelican/IdeaProjects/SistemadeGestionHospitalariaoClinica/src/main/java/com/ikravchenko/clinica/ServletInitializer.java
 /Users/pelican/IdeaProjects/SistemadeGestionHospitalariaoClinica/src/main/java/com/ikravchenko/clinica/controllers/AdministrativoController.java
 /Users/pelican/IdeaProjects/SistemadeGestionHospitalariaoClinica/src/main/java/com/ikravchenko/clinica/controllers/ConsultaController.java
@@ -10,7 +8,7 @@
 /Users/pelican/IdeaProjects/SistemadeGestionHospitalariaoClinica/src/main/java/com/ikravchenko/clinica/controllers/HomeController.java
 /Users/pelican/IdeaProjects/SistemadeGestionHospitalariaoClinica/src/main/java/com/ikravchenko/clinica/controllers/MedicoController.java
 /Users/pelican/IdeaProjects/SistemadeGestionHospitalariaoClinica/src/main/java/com/ikravchenko/clinica/controllers/PacienteController.java
-/Users/pelican/IdeaProjects/SistemadeGestionHospitalariaoClinica/src/main/java/com/ikravchenko/clinica/controllers/ProductoController.java
+/Users/pelican/IdeaProjects/SistemadeGestionHospitalariaoClinica/src/main/java/com/ikravchenko/clinica/controllers/ReportesController.java
 /Users/pelican/IdeaProjects/SistemadeGestionHospitalariaoClinica/src/main/java/com/ikravchenko/clinica/exceptions/DatosInvalidosException.java
 /Users/pelican/IdeaProjects/SistemadeGestionHospitalariaoClinica/src/main/java/com/ikravchenko/clinica/exceptions/DniDuplicadoException.java
 /Users/pelican/IdeaProjects/SistemadeGestionHospitalariaoClinica/src/main/java/com/ikravchenko/clinica/exceptions/MedicoNoDisponibleException.java
@@ -28,7 +26,6 @@
 /Users/pelican/IdeaProjects/SistemadeGestionHospitalariaoClinica/src/main/java/com/ikravchenko/clinica/models/Medico.java
 /Users/pelican/IdeaProjects/SistemadeGestionHospitalariaoClinica/src/main/java/com/ikravchenko/clinica/models/Paciente.java
 /Users/pelican/IdeaProjects/SistemadeGestionHospitalariaoClinica/src/main/java/com/ikravchenko/clinica/models/Persona.java
-/Users/pelican/IdeaProjects/SistemadeGestionHospitalariaoClinica/src/main/java/com/ikravchenko/clinica/models/Producto.java
 /Users/pelican/IdeaProjects/SistemadeGestionHospitalariaoClinica/src/main/java/com/ikravchenko/clinica/models/Turno.java
 /Users/pelican/IdeaProjects/SistemadeGestionHospitalariaoClinica/src/main/java/com/ikravchenko/clinica/repositories/AdministrativoRepository.java
 /Users/pelican/IdeaProjects/SistemadeGestionHospitalariaoClinica/src/main/java/com/ikravchenko/clinica/repositories/ConsultaRepository.java
@@ -37,5 +34,4 @@
 /Users/pelican/IdeaProjects/SistemadeGestionHospitalariaoClinica/src/main/java/com/ikravchenko/clinica/repositories/HistorialMedicoRepository.java
 /Users/pelican/IdeaProjects/SistemadeGestionHospitalariaoClinica/src/main/java/com/ikravchenko/clinica/repositories/MedicoRepository.java
 /Users/pelican/IdeaProjects/SistemadeGestionHospitalariaoClinica/src/main/java/com/ikravchenko/clinica/repositories/PacienteRepository.java
-/Users/pelican/IdeaProjects/SistemadeGestionHospitalariaoClinica/src/main/java/com/ikravchenko/clinica/repositories/ProductoRepository.java
 /Users/pelican/IdeaProjects/SistemadeGestionHospitalariaoClinica/src/main/java/com/ikravchenko/clinica/services/ProductosService.java

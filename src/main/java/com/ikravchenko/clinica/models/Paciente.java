@@ -7,13 +7,8 @@ import jakarta.persistence.*;
 public class Paciente extends Persona {
 
     @Enumerated(EnumType.STRING)
-    @Column
     private GrupoSanguineo grupoSanguineo;
-    
-    @Column
     private String alergias;
-    
-    @Column
     private String historialMedico;
     
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -31,7 +26,7 @@ public class Paciente extends Persona {
     public void mostrarInformacion() {
         System.out.println("Paciente: " + nombre + " " + apellido);
         System.out.println("DNI: " + dni);
-        System.out.println("Grupo Sanguíneo: " + grupoSanguineo);
+        System.out.println("Grupo Sanguineo: " + grupoSanguineo);
         System.out.println("Alergias: " + alergias);
     }
 

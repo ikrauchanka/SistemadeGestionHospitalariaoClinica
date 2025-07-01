@@ -25,6 +25,12 @@ public class EnfermeroController {
         return "enfermeros";
     }
 
+    @GetMapping("/enfermeros/eliminar/{id}")
+    public String eliminarEnfermero(@PathVariable Long id) {
+        enfermeroRepository.deleteById(id);
+        return "redirect:/enfermeros";
+    }
+    
     @GetMapping("/enfermeros/nuevo")
     public String mostrarFormulario(Model model) {
         model.addAttribute("enfermero", new Enfermero());
@@ -40,9 +46,5 @@ public class EnfermeroController {
         return "redirect:/enfermeros";
     }
 
-    @GetMapping("/enfermeros/eliminar/{id}")
-    public String eliminarEnfermero(@PathVariable Long id) {
-        enfermeroRepository.deleteById(id);
-        return "redirect:/enfermeros";
-    }
+
 } 

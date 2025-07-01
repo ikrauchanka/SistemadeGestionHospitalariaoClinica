@@ -11,8 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 
 @Controller
@@ -45,18 +43,18 @@ public class ConsultaController {
         return "formularioConsulta";
     }
 
+    // mas deficil parte
     @PostMapping("/consultas")
     public String guardarConsulta(@ModelAttribute Consulta consulta, 
-                                 @RequestParam Long medicoId,
-                                 @RequestParam Long pacienteId) {
-        Medico medico = medicoRepository.findById(medicoId)
-                .orElseThrow(() -> new RuntimeException("Médico no encontrado"));
-        Paciente paciente = pacienteRepository.findById(pacienteId)
-                .orElseThrow(() -> new RuntimeException("Paciente no encontrado"));
-        
-        consulta.setMedico(medico);
-        consulta.setPaciente(paciente);
-        
+                                  @RequestParam Long medicoId,
+                                  @RequestParam Long pacienteId) {
+    
+        consulta.setMedico(medicoRepository.findById(medicoId)
+            .orElseThrow(() -> new RuntimeException("Medico no encontrado")));
+    
+        consulta.setPaciente(pacienteRepository.findById(pacienteId)
+            .orElseThrow(() -> new RuntimeException("Paciente no encontrado")));
+    
         consultaRepository.save(consulta);
         return "redirect:/consultas";
     }

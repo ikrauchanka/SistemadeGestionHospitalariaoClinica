@@ -9,31 +9,18 @@ public abstract class Persona {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
-
-    @Column
-    protected String nombre;
-    
     @Column(unique = true)
     protected int dni;
-    
-    @Column
+
+    protected String nombre;
     protected String apellido;
-    
-    @Column
     protected String fechaNacimiento;
-    
-    @Column
     protected String direccion;
-    
-    @Column
     protected String telefono;
-    
-    @Column
     protected String email;
-    
-    @Column
     protected Boolean activo = true;
 
+    
     public Persona() {
     }
 

@@ -3,15 +3,11 @@ package com.ikravchenko.clinica.models;
 import jakarta.persistence.*;
 
 @Entity
-public class Empleado extends Persona{
-    @Column
+public class Empleado extends Persona {
+    
     private double salario;
-
     @Enumerated(EnumType.STRING)
-    @Column
     private Cargo cargo;
-
-    @Column
     private String fechaContratacion;
 
     public Empleado() {
@@ -31,7 +27,7 @@ public class Empleado extends Persona{
         System.out.println("DNI: " + dni);
         System.out.println("Cargo: " + cargo);
         System.out.println("Salario: $" + salario);
-        System.out.println("Fecha de contratación: " + fechaContratacion);
+        System.out.println("Fecha de contratacion: " + fechaContratacion);
     }
 
     public double getSalario() {

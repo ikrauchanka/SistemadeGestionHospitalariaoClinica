@@ -46,7 +46,7 @@ public class HistorialMedico {
         consulta.setHistorialMedico(this);
     }
 
-    // Getters and Setters
+    // Getters y Setters
     public Long getIdHistorial() {
         return idHistorial;
     }

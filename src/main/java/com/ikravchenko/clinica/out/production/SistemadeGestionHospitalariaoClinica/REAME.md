@@ -19,3 +19,11 @@ horario
 excepciones(como)
 
 layer for database
+
+
+Persona (abstract) 
+├── Paciente (concrete) → persona + pacientes tables
+└── Empleado (concrete) → persona + empleado table
+    ├── Medico (concrete) → persona + empleado + medico tables
+    ├── Enfermero (concrete) → persona + empleado + enfermero tables
+    └── Administrativo (concrete) → persona + empleado + administrativo tables

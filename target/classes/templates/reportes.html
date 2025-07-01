@@ -1,24 +1,89 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <title>Reportes</title>
     <meta charset="UTF-8">
-    <title>Reportes y Estadísticas</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 2em; }
-        h1 { color: #2c3e50; }
-        .card { background: #f8f8f8; border-radius: 8px; padding: 1em; margin-bottom: 1em; box-shadow: 0 2px 4px #0001; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .btn {
+            padding: 10px 20px;
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            border-radius: 5px;
+            margin-right: 10px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+            text-decoration: none;
+            color: white;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+        .btn-secondary:hover {
+            background-color: #545b62;
+        }
+        .report-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+        }
+        .report-section h3 {
+            color: #495057;
+            margin-bottom: 15px;
+        }
+        .report-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: white;
+            border-radius: 3px;
+            border-left: 4px solid #007bff;
+        }
     </style>
 </head>
 <body>
-    <h1>📊 Reportes y Estadísticas</h1>
-    <div class="card">
-        <h2>Pacientes registrados</h2>
-        <p>Próximamente здесь будет статистика по пациентам.</p>
+    <div class="container">
+        <h1>Reportes del Sistema</h1>
+        
+        <a href="/" class="btn btn-secondary">Inicio</a>
+        
+        <div class="report-section">
+            <h3>Estadísticas Generales</h3>
+            <div class="report-item">
+                <strong>Total de Pacientes:</strong> <span th:text="${totalPacientes}">0</span>
+            </div>
+            <div class="report-item">
+                <strong>Total de Médicos:</strong> <span th:text="${totalMedicos}">0</span>
+            </div>
+            <div class="report-item">
+                <strong>Total de Consultas:</strong> <span th:text="${totalConsultas}">0</span>
+            </div>
+            <div class="report-item">
+                <strong>Total de Empleados:</strong> <span th:text="${totalEmpleados}">0</span>
+            </div>
+        </div>
     </div>
-    <div class="card">
-        <h2>Consultas realizadas</h2>
-        <p>Прóximamente здесь появится информация о консультациях.</p>
-    </div>
-    <a href="/" style="display:inline-block;margin-top:2em;">← Volver al inicio</a>
 </body>
 </html> 

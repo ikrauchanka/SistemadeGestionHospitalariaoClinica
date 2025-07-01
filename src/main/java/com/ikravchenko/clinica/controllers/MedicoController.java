@@ -32,15 +32,17 @@ public class MedicoController {
         return "formularioMedico";
     }
 
+    @GetMapping("/medicos/eliminar/{id}")
+    public String eliminarMedico(@PathVariable Long id) {
+        medicoRepository.deleteById(id);
+        return "redirect:/medicos";
+    }
+    
     @PostMapping("/medicos")
     public String guardarMedico(@ModelAttribute Medico medico) {
         medicoRepository.save(medico);
         return "redirect:/medicos";
     }
 
-    @GetMapping("/medicos/eliminar/{id}")
-    public String eliminarMedico(@PathVariable Long id) {
-        medicoRepository.deleteById(id);
-        return "redirect:/medicos";
-    }
+
 } 

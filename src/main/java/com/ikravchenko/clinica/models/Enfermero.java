@@ -6,11 +6,9 @@ import jakarta.persistence.*;
 public class Enfermero extends Empleado {
 
     @Enumerated(EnumType.STRING)
-    @Column
     private Area area;
 
     @Enumerated(EnumType.STRING)
-    @Column
     private Turno turno;
 
     public Enfermero() {
