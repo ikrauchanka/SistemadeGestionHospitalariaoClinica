@@ -197,3 +197,6 @@ coverage/
 # Nested build output directories (shouldn't exist in normal Maven projects)
 target/classes/com/ikravchenko/clinica/out/
 **/out/
+
+# Specific nested output directory in source
+src/main/java/com/ikravchenko/clinica/out/
