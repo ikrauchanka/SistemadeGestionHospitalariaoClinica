@@ -1,0 +1,134 @@
+@startuml MVC Architecture - Hospital Management System
+
+!theme plain
+skinparam backgroundColor #FEFEFE
+skinparam componentStyle rectangle
+
+title Hospital Management System - MVC Architecture
+
+package "View Layer (Thymeleaf Templates)" {
+    [index.html] as Index
+    [pacientes.html] as PacientesView
+    [medicos.html] as MedicosView
+    [empleados.html] as EmpleadosView
+    [consultas.html] as ConsultasView
+    [historiales.html] as HistorialesView
+    [formularioPaciente.html] as FormPaciente
+    [formularioMedico.html] as FormMedico
+    [verConsulta.html] as VerConsulta
+    [verHistorial.html] as VerHistorial
+    [reportes.html] as ReportesView
+}
+
+package "Controller Layer (Spring Controllers)" {
+    [HomeController] as HomeCtrl
+    [PacienteController] as PacienteCtrl
+    [MedicoController] as MedicoCtrl
+    [EmpleadoController] as EmpleadoCtrl
+    [EnfermeroController] as EnfermeroCtrl
+    [AdministrativoController] as AdminCtrl
+    [ConsultaController] as ConsultaCtrl
+    [HistorialMedicoController] as HistorialCtrl
+    [ReportesController] as ReportesCtrl
+}
+
+package "Service Layer" {
+    [ProductosService] as ProductosSvc
+}
+
+package "Repository Layer (Data Access)" {
+    [PacienteRepository] as PacienteRepo
+    [MedicoRepository] as MedicoRepo
+    [EmpleadoRepository] as EmpleadoRepo
+    [EnfermeroRepository] as EnfermeroRepo
+    [AdministrativoRepository] as AdminRepo
+    [ConsultaRepository] as ConsultaRepo
+    [HistorialMedicoRepository] as HistorialRepo
+}
+
+package "Model Layer (JPA Entities)" {
+    [Persona] as PersonaModel
+    [Paciente] as PacienteModel
+    [Empleado] as EmpleadoModel
+    [Medico] as MedicoModel
+    [Enfermero] as EnfermeroModel
+    [Administrativo] as AdminModel
+    [Consulta] as ConsultaModel
+    [HistorialMedico] as HistorialModel
+}
+
+database "MySQL Database" {
+    [persona] as PersonaTable
+    [pacientes] as PacientesTable
+    [empleados] as EmpleadosTable
+    [medicos] as MedicosTable
+    [enfermeros] as EnfermerosTable
+    [administrativos] as AdminTable
+    [consulta] as ConsultaTable
+    [historial_medico] as HistorialTable
+}
+
+' View to Controller relationships
+Index --> HomeCtrl : HTTP GET /
+PacientesView --> PacienteCtrl : HTTP GET /pacientes
+MedicosView --> MedicoCtrl : HTTP GET /medicos
+EmpleadosView --> EmpleadoCtrl : HTTP GET /empleados
+ConsultasView --> ConsultaCtrl : HTTP GET /consultas
+HistorialesView --> HistorialCtrl : HTTP GET /historiales
+FormPaciente --> PacienteCtrl : HTTP POST /pacientes
+FormMedico --> MedicoCtrl : HTTP POST /medicos
+VerConsulta --> ConsultaCtrl : HTTP GET /consultas/{id}
+VerHistorial --> HistorialCtrl : HTTP GET /historiales/{id}
+ReportesView --> ReportesCtrl : HTTP GET /reportes
+
+' Controller to Repository relationships
+PacienteCtrl --> PacienteRepo : @Autowired
+MedicoCtrl --> MedicoRepo : @Autowired
+EmpleadoCtrl --> EmpleadoRepo : @Autowired
+EnfermeroCtrl --> EnfermeroRepo : @Autowired
+AdminCtrl --> AdminRepo : @Autowired
+ConsultaCtrl --> ConsultaRepo : @Autowired
+HistorialCtrl --> HistorialRepo : @Autowired
+
+' Repository to Model relationships
+PacienteRepo --> PacienteModel : JPA Repository
+MedicoRepo --> MedicoModel : JPA Repository
+EmpleadoRepo --> EmpleadoModel : JPA Repository
+EnfermeroRepo --> EnfermeroModel : JPA Repository
+AdminRepo --> AdminModel : JPA Repository
+ConsultaRepo --> ConsultaModel : JPA Repository
+HistorialRepo --> HistorialModel : JPA Repository
+
+' Model to Database relationships
+PersonaModel --> PersonaTable : @Entity
+PacienteModel --> PacientesTable : @Entity
+EmpleadoModel --> EmpleadosTable : @Entity
+MedicoModel --> MedicosTable : @Entity
+EnfermeroModel --> EnfermerosTable : @Entity
+AdminModel --> AdminTable : @Entity
+ConsultaModel --> ConsultaTable : @Entity
+HistorialModel --> HistorialTable : @Entity
+
+' Inheritance relationships in Model layer
+PersonaModel <|-- PacienteModel
+PersonaModel <|-- EmpleadoModel
+EmpleadoModel <|-- MedicoModel
+EmpleadoModel <|-- EnfermeroModel
+EmpleadoModel <|-- AdminModel
+
+note right of HomeCtrl
+    Main entry point
+    Routes to different views
+end note
+
+note right of PacienteCtrl
+    Handles patient CRUD operations
+    Creates medical history automatically
+end note
+
+note right of ConsultaCtrl
+    Manages medical appointments
+    Links doctors, patients, and medical history
+end note
+
+@enduml 

@@ -1,0 +1,132 @@
+@startuml Sequence Diagram - Patient Registration and Consultation
+
+!theme plain
+skinparam backgroundColor #FEFEFE
+skinparam sequenceMessageAlign center
+
+title Patient Registration and Medical Consultation Workflow
+
+actor "User" as U
+participant "PacienteController" as PC
+participant "PacienteRepository" as PR
+participant "HistorialMedicoRepository" as HR
+participant "ConsultaController" as CC
+participant "ConsultaRepository" as CR
+participant "MedicoRepository" as MR
+participant "Database" as DB
+
+== Patient Registration ==
+
+U -> PC: GET /pacientes/nuevo
+activate PC
+PC -> U: Show patient form
+deactivate PC
+
+U -> PC: POST /pacientes (patient data)
+activate PC
+PC -> PR: save(patient)
+activate PR
+PR -> DB: INSERT INTO pacientes
+activate DB
+DB -> PR: Patient saved with ID
+deactivate DB
+PR -> PC: Patient entity
+deactivate PR
+
+PC -> HR: save(new HistorialMedico(patient))
+activate HR
+HR -> DB: INSERT INTO historial_medico
+activate DB
+DB -> HR: Medical history saved
+deactivate DB
+HR -> PC: Medical history entity
+deactivate HR
+
+PC -> PR: save(patient with historial)
+activate PR
+PR -> DB: UPDATE pacientes SET historial_id
+activate DB
+DB -> PR: Patient updated
+deactivate DB
+PR -> PC: Updated patient
+deactivate PR
+
+PC -> U: Redirect to /pacientes
+deactivate PC
+
+== Medical Consultation Creation ==
+
+U -> CC: GET /consultas/nueva
+activate CC
+CC -> MR: findAll()
+activate MR
+MR -> DB: SELECT * FROM medicos
+activate DB
+DB -> MR: List of doctors
+deactivate DB
+MR -> CC: Doctors list
+deactivate MR
+
+CC -> PR: findAll()
+activate PR
+PR -> DB: SELECT * FROM pacientes
+activate DB
+DB -> PR: List of patients
+deactivate DB
+PR -> CC: Patients list
+deactivate PR
+
+CC -> U: Show consultation form
+deactivate CC
+
+U -> CC: POST /consultas (consultation data)
+activate CC
+CC -> CR: save(consulta)
+activate CR
+CR -> DB: INSERT INTO consulta
+activate DB
+DB -> CR: Consultation saved
+deactivate DB
+CR -> CC: Consultation entity
+deactivate CR
+
+CC -> U: Redirect to /consultas
+deactivate CC
+
+== View Medical History ==
+
+U -> CC: GET /historiales/{id}
+activate CC
+CC -> HR: findById(id)
+activate HR
+HR -> DB: SELECT * FROM historial_medico WHERE id = ?
+activate DB
+DB -> HR: Medical history
+deactivate DB
+HR -> CC: Medical history entity
+deactivate HR
+
+CC -> CR: findByHistorialMedico(historial)
+activate CR
+CR -> DB: SELECT * FROM consulta WHERE historial_id = ?
+activate DB
+DB -> CR: List of consultations
+deactivate DB
+CR -> CC: Consultations list
+deactivate CR
+
+CC -> U: Show medical history details
+deactivate CC
+
+note over U, DB
+    This sequence shows the complete workflow
+    from patient registration to consultation
+    creation and medical history viewing.
+    
+    Key features:
+    - Automatic medical history creation
+    - Proper relationship management
+    - Data consistency through transactions
+end note
+
+@enduml 

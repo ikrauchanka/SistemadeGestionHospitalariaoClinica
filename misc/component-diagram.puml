@@ -1,0 +1,112 @@
+@startuml Component Diagram - Hospital Management System
+
+!theme plain
+skinparam backgroundColor #FEFEFE
+skinparam componentStyle rectangle
+
+title Hospital Management System - Component Architecture
+
+package "Web Layer" {
+    [Thymeleaf Templates] as Templates
+    [CSS/JavaScript] as Frontend
+    [Bootstrap Styling] as Bootstrap
+}
+
+package "Application Layer" {
+    [Spring Boot Application] as SpringBoot
+    [Spring MVC Controllers] as Controllers
+    [Spring Data JPA] as JPA
+    [Spring Security] as Security
+}
+
+package "Business Logic Layer" {
+    [Service Layer] as Services
+    [Business Rules] as BusinessRules
+    [Validation Logic] as Validation
+}
+
+package "Data Access Layer" {
+    [Repository Interfaces] as Repositories
+    [JPA Entities] as Entities
+    [Database Connection Pool] as ConnectionPool
+}
+
+package "Database Layer" {
+    [MySQL Database] as MySQL
+    [Database Schema] as Schema
+    [Stored Procedures] as Procedures
+}
+
+package "Infrastructure Layer" {
+    [Application Server] as AppServer
+    [Web Server] as WebServer
+    [File System] as FileSystem
+}
+
+' Web Layer connections
+Templates --> Controllers : HTTP Requests
+Frontend --> Templates : Styling
+Bootstrap --> Templates : UI Components
+
+' Application Layer connections
+Controllers --> Services : Business Logic
+Controllers --> Repositories : Data Access
+JPA --> Entities : Object Mapping
+Security --> Controllers : Authentication
+
+' Business Logic connections
+Services --> BusinessRules : Validation
+Services --> Validation : Input Validation
+Services --> Repositories : Data Operations
+
+' Data Access connections
+Repositories --> Entities : CRUD Operations
+Repositories --> ConnectionPool : Database Connection
+Entities --> Schema : Table Mapping
+
+' Database connections
+ConnectionPool --> MySQL : Connection Management
+Schema --> MySQL : Data Storage
+Procedures --> MySQL : Complex Queries
+
+' Infrastructure connections
+AppServer --> WebServer : Request Handling
+WebServer --> AppServer : Response Delivery
+FileSystem --> Templates : Static Resources
+
+note right of SpringBoot
+    Spring Boot 3.x
+    Java 17+
+    Embedded Tomcat
+    Auto-configuration
+end note
+
+note right of MySQL
+    MySQL 8.0+
+    InnoDB Engine
+    UTF-8 Encoding
+    Connection Pooling
+end note
+
+note right of Templates
+    Thymeleaf 3.x
+    Server-side rendering
+    Template inheritance
+    Form handling
+end note
+
+note right of JPA
+    Hibernate ORM
+    JPA 3.x
+    Entity relationships
+    Transaction management
+end note
+
+note right of Services
+    Business logic layer
+    Transaction boundaries
+    Data validation
+    Error handling
+end note
+
+@enduml 

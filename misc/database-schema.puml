@@ -1,0 +1,165 @@
+@startuml Database Schema - Hospital Management System
+
+!theme plain
+skinparam backgroundColor #FEFEFE
+skinparam linetype ortho
+
+title Hospital Management System - Database Schema
+
+entity "persona" {
+    * id : BIGINT <<PK>>
+    --
+    * dni : INT <<UNIQUE>>
+    * nombre : VARCHAR(255)
+    * apellido : VARCHAR(255)
+    * fecha_nacimiento : VARCHAR(255)
+    * direccion : VARCHAR(255)
+    * telefono : VARCHAR(255)
+    * email : VARCHAR(255)
+    * activo : BOOLEAN
+    --
+    <<JPA Inheritance>>
+    <<JOINED Strategy>>
+}
+
+entity "pacientes" {
+    * id : BIGINT <<PK>>
+    --
+    * grupo_sanguineo : VARCHAR(255)
+    * alergias : VARCHAR(255)
+    * historial_medico : VARCHAR(255)
+    * historial_id : BIGINT <<FK>>
+    --
+    <<Inherits from persona>>
+}
+
+entity "empleados" {
+    * id : BIGINT <<PK>>
+    --
+    * salario : DOUBLE
+    * cargo : VARCHAR(255)
+    * fecha_contratacion : VARCHAR(255)
+    --
+    <<Inherits from persona>>
+}
+
+entity "medicos" {
+    * id : BIGINT <<PK>>
+    --
+    * especialidad : VARCHAR(255)
+    * num_matricula : VARCHAR(255)
+    --
+    <<Inherits from empleados>>
+}
+
+entity "enfermeros" {
+    * id : BIGINT <<PK>>
+    --
+    * area : VARCHAR(255)
+    * turno : VARCHAR(255)
+    --
+    <<Inherits from empleados>>
+}
+
+entity "administrativos" {
+    * id : BIGINT <<PK>>
+    --
+    * departamento : VARCHAR(255)
+    --
+    <<Inherits from empleados>>
+}
+
+entity "consulta" {
+    * id_consulta : BIGINT <<PK>>
+    --
+    * fecha_consulta : DATE
+    * hora_consulta : TIME
+    * motivo : VARCHAR(255)
+    * diagnostico : VARCHAR(255)
+    * tratamiento_indicado : VARCHAR(255)
+    * medico_id : BIGINT <<FK>>
+    * paciente_id : BIGINT <<FK>>
+    * historial_id : BIGINT <<FK>>
+}
+
+entity "historial_medico" {
+    * id_historial : BIGINT <<PK>>
+    --
+    * paciente_id : BIGINT <<FK>>
+}
+
+entity "medico_horario" {
+    * medico_id : BIGINT <<FK>>
+    * dia : VARCHAR(255)
+    --
+    * horario : VARCHAR(255)
+    --
+    <<Element Collection>>
+}
+
+entity "historial_diagnosticos" {
+    * historial_id : BIGINT <<FK>>
+    --
+    * diagnostico : VARCHAR(255)
+    --
+    <<Element Collection>>
+}
+
+entity "historial_tratamientos" {
+    * historial_id : BIGINT <<FK>>
+    --
+    * tratamiento : VARCHAR(255)
+    --
+    <<Element Collection>>
+}
+
+' Inheritance relationships (JOINED strategy)
+persona ||--o{ pacientes : "inherits"
+persona ||--o{ empleados : "inherits"
+empleados ||--o{ medicos : "inherits"
+empleados ||--o{ enfermeros : "inherits"
+empleados ||--o{ administrativos : "inherits"
+
+' Foreign key relationships
+pacientes }o--|| historial_medico : "has one"
+consulta }o--|| medicos : "conducted by"
+consulta }o--|| pacientes : "attended by"
+consulta }o--|| historial_medico : "belongs to"
+historial_medico }o--|| pacientes : "belongs to"
+
+' Element collections
+medicos ||--o{ medico_horario : "has schedule"
+historial_medico ||--o{ historial_diagnosticos : "has diagnoses"
+historial_medico ||--o{ historial_tratamientos : "has treatments"
+
+note right of persona
+    Base table for all persons
+    Uses JOINED inheritance strategy
+    Common fields for all person types
+end note
+
+note right of pacientes
+    Patient-specific information
+    Links to medical history
+    Blood type and allergies
+end note
+
+note right of empleados
+    Employee-specific information
+    Salary, position, hire date
+    Base for all employee types
+end note
+
+note right of consulta
+    Medical appointments
+    Links doctors, patients, and medical history
+    Contains diagnosis and treatment info
+end note
+
+note right of historial_medico
+    Patient medical history
+    Contains diagnoses and treatments
+    Links to all patient consultations
+end note
+
+@enduml 
