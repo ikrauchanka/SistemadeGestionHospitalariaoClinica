@@ -1,3 +1,39 @@
+# SistemadeGestionHospitalariaoClinica
+Sistema de Gestion Hospitalaria/Clínica
+
+mvn clean spring-boot:run
+docker exec -it mysql-container mysql -u root -p
+
+
+```bash
+mkdir src/main/java
+
+docker exec -it mysql-container mysql -u root -p <passw0rd>
+
+mvn compile exec:java -Dexec.mainClass=TestConnection
+
+docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=passw0rd -p 3306:3306 -d mysql:latest
+
+mvn compile
+
+mvn exec:java
+
+```
+// Preguntas
+
+como acer único
+
+horario
+
+excepciones(como)
+
+layer for database
+
+creando los objetos (horario etc...) do I need to run init script to create it ?
+
+```
+mvn clean spring-boot:run
+
 # Quick Start Guide
 
 ## Docker Setup
@@ -33,7 +69,7 @@ USE clinica;
 
 ### Import Data
 ```bash
-docker exec -i clinica-mysql mysql -u clinica -pclinica123 clinica < fake_data.sql
+docker exec -i clinica-mysql mysql -u clinica -pclinica123 clinica < misc/fake_data.sql
 ```
 
 ## Run Application
@@ -46,14 +82,11 @@ mvn clean compile
 # Run application
 mvn spring-boot:run
 
-# Package WAR
+# Package JAR
 mvn clean package
 
-# Run WAR (embedded Tomcat)
-java -jar target/clinica-0.0.1-SNAPSHOT.war
-
-# Deploy to external Tomcat (optional)
-# Copy target/clinica-0.0.1-SNAPSHOT.war to $TOMCAT_HOME/webapps/
+# Run JAR
+java -jar target/SistemadeGestionHospitalariaoClinica-0.0.1-SNAPSHOT.jar
 ```
 
 ## Access Application
@@ -68,15 +101,5 @@ mvn spring-boot:run
 
 # Stop everything
 docker stop clinica-mysql
-# Ctrl+C to stop Spring Boot
-```
 
-## Mejoras del Proyecto
-
-- **Pruebas unitarias**: Implementar tests con JUnit 5 y Mockito
-- **Implementar RBAC**: Control de acceso basado en roles (Role-Based Access Control)
-- **Mejorar validación**: Agregar Bean Validation y validadores personalizados
-- **Notificaciones por email**: Sistema de alertas y recordatorios automáticos
-- **Paginación**: Manejo eficiente de grandes volúmenes de datos
-- **Búsqueda y filtros**: Funcionalidad de búsqueda avanzada
-- **Interfaz responsiva**: Diseño adaptable para dispositivos móviles
+``` 

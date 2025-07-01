@@ -1,7 +1,7 @@
 package com.ikravchenko.clinica.models;
 
 public enum Turno {
-    MAÑANA,
+    MANANA,
     TARDE,
     NOCHE
 }

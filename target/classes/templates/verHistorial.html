@@ -127,9 +127,37 @@
                 <span class="info-value" th:text="${historial.idHistorial}"></span>
             </div>
             <div class="info-row">
-                <span class="info-label">Fecha de Creación:</span>
-                <span class="info-value" th:text="${historial.fechaCreacion}"></span>
+                <span class="info-label">Total de Diagnósticos:</span>
+                <span class="info-value" th:text="${#lists.size(historial.diagnosticos)}"></span>
             </div>
+            <div class="info-row">
+                <span class="info-label">Total de Tratamientos:</span>
+                <span class="info-value" th:text="${#lists.size(historial.tratamientos)}"></span>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3>Diagnósticos</h3>
+            <ul class="consultas-list" th:if="${historial.diagnosticos != null and !historial.diagnosticos.isEmpty()}">
+                <li th:each="diagnostico : ${historial.diagnosticos}" class="consulta-item">
+                    <div class="consulta-header" th:text="${diagnostico}"></div>
+                </li>
+            </ul>
+            <p th:if="${historial.diagnosticos == null or historial.diagnosticos.isEmpty()}" style="text-align: center; color: #6c757d; font-style: italic;">
+                No hay diagnósticos registrados en este historial.
+            </p>
+        </div>
+        
+        <div class="section">
+            <h3>Tratamientos</h3>
+            <ul class="consultas-list" th:if="${historial.tratamientos != null and !historial.tratamientos.isEmpty()}">
+                <li th:each="tratamiento : ${historial.tratamientos}" class="consulta-item">
+                    <div class="consulta-header" th:text="${tratamiento}"></div>
+                </li>
+            </ul>
+            <p th:if="${historial.tratamientos == null or historial.tratamientos.isEmpty()}" style="text-align: center; color: #6c757d; font-style: italic;">
+                No hay tratamientos registrados en este historial.
+            </p>
         </div>
         
         <div class="section">

@@ -85,6 +85,11 @@
         <a href="/medicos/nuevo" class="btn">Nuevo Médico</a>
         <a href="/" class="btn btn-secondary">Inicio</a>
         
+        <!-- Error Message Display -->
+        <div th:if="${error}" style="background-color: #f8d7da; color: #721c24; padding: 10px; border-radius: 5px; margin-bottom: 20px; border: 1px solid #f5c6cb;">
+            <span th:text="${error}"></span>
+        </div>
+        
         <table>
             <thead>
                 <tr>

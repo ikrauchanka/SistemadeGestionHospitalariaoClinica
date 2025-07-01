@@ -89,7 +89,8 @@
                 <tr>
                     <th>ID</th>
                     <th>Paciente</th>
-                    <th>Fecha Creación</th>
+                    <th>Diagnósticos</th>
+                    <th>Tratamientos</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -97,7 +98,8 @@
                 <tr th:each="historial : ${historiales}">
                     <td th:text="${historial.idHistorial}"></td>
                     <td th:text="${historial.paciente.nombre + ' ' + historial.paciente.apellido}"></td>
-                    <td th:text="${historial.fechaCreacion}"></td>
+                    <td th:text="${#lists.size(historial.diagnosticos)} + ' diagnósticos'"></td>
+                    <td th:text="${#lists.size(historial.tratamientos)} + ' tratamientos'"></td>
                     <td>
                         <a th:href="@{/historiales/{id}(id=${historial.idHistorial})}" class="btn btn-info">Ver</a>
                     </td>
